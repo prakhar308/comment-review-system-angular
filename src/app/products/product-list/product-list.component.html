@@ -13,8 +13,6 @@
                <tr>
                   <th></th>
                   <th>Product</th>
-                  <th>Code</th>
-                  <th>Available</th>
                   <th>Price</th>
                   <th>Rating</th>
                </tr>
@@ -32,8 +30,6 @@
                         {{ product.productName }}
                      </a>
                   </td>
-                  <td>{{ product.productCode | lowercase | convertToSpaces: '-'}}</td>
-                  <td>{{ product.releaseDate }}</td>
                   <td>{{ product.price | currency:'USD':'symbol' }}</td>
                   <td>
                      <pm-star [rating]="product.starRating"

@@ -3,14 +3,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators'
 
-import { IProduct } from './product'
+import { IProduct } from './product.model'
 
 @Injectable({
    providedIn: 'root',
 })
 export class ProductService {
 
-   private productUrl = 'api/products/products.json'
+   private productUrl = 'https://kibo-hackathon.herokuapp.com/rating/get_product/'
 
    constructor(private http: HttpClient) { }
 

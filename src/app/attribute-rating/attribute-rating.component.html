@@ -1,0 +1,18 @@
+<div class="attribute-rating">
+  <div class="rating-circle">
+    
+    <svg width="200" height="200" viewPort="0 0 100 100">
+      <circle cx="50" cy="50" r="30" stroke="#F5F5F5" stroke-width="4" fill="transparent" stroke-dasharray="188.2">
+      </circle>
+      <circle id="outer-circle" cx="50" cy="50" r="30" stroke="green" stroke-width="4" fill="transparent" stroke-dasharray="188.2"
+        [ngStyle]="{'stroke-dashoffset': strokeOffset}">
+      </circle>
+    </svg>
+    
+    <div class="rating-number">
+      <h5>{{ rating }}</h5>
+    </div>
+  
+  </div>
+  <h5>{{ name }}</h5>
+</div>

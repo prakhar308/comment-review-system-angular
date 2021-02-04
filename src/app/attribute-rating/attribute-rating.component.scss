@@ -1,0 +1,20 @@
+.attribute-rating {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+
+  .rating-circle {
+    position: relative;
+    height: 80px;
+    width: 80px;
+
+    .rating-number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
