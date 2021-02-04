@@ -28,7 +28,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/api"
             ],
             "styles": [
               "src/styles.scss"
@@ -127,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "comment-review-system-angular"
+  "defaultProject": "comment-review-system-angular",
+  "cli": {
+    "analytics": false
+  }
 }
