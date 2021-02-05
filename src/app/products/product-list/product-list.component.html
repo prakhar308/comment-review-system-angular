@@ -4,6 +4,8 @@
       {{pageTitle}}
    </div>
    
+   <spinner *ngIf="!products"></spinner>
+
    <div class="card-body">
       
       <div class="table-responsive">
@@ -32,9 +34,7 @@
                   </td>
                   <td>{{ product.price | currency:'USD':'symbol' }}</td>
                   <td>
-                     <pm-star [rating]="product.starRating"
-                        (ratingClicked)="onRatingClicked($event)">      
-                     </pm-star>
+                     <pm-star [rating]='product.overAllRating'></pm-star>
                   </td>
                </tr>
             </tbody>

@@ -1,9 +1,51 @@
-<div class="card" *ngIf="product">
-   <div class="card-header">
-      {{ pageTitle + ': ' + product.productName }}
-   </div>
+<spinner *ngIf="!product"></spinner>
 
-   <div class='card-body'>
+<div class="card" *ngIf="product">
+
+  <!-- Modal for writing new review -->
+  <div id="reviewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Write Review</h4>
+        </div>
+        <div class="modal-body">
+          <form ngNativeValidate>
+
+            <div class="form-group">
+              <label for="">Rating</label>
+            </div>
+            <div class="form-group">
+              <label for="userName">Name</label>
+              <input type="text" class="form-control" id="userName" name="userName" required>
+            </div>
+            <div class="form-group">
+              <label for="userName">Email</label>
+              <input type="email" class="form-control" id="userName" name="userName" required>
+            </div>
+            <div class="form-group">
+              <label for="userName">Review</label>
+              <textarea name="comment" class="form-control" id="comment" cols="30" rows="5" required></textarea>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card-header">
+    {{ product.productName }}
+  </div>
+
+  <div class='card-body'>
     <div class='row'>
       <div class='col-md-8'>
         <div class='row'>
@@ -21,40 +63,51 @@
         <div class='row'>
           <div class='col-md-4'>Rating:</div>
           <div class='col-md-8'>
-            <pm-star [rating]='product.starRating'>
+            <pm-star [rating]='+product.overAllRating'>
             </pm-star>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12" style="display: flex;">
-            <attribute-rating [rating]="5" [name]=""></attribute-rating>
-            <attribute-rating [rating]="4" [name]=""></attribute-rating>
-            <attribute-rating [rating]="3" [name]=""></attribute-rating>
+            <ng-container *ngFor="let attribute of product.attributeRating">
+              <attribute-rating [rating]="+attribute.rating" [name]="attribute.name"></attribute-rating>
+            </ng-container>
           </div>
         </div>
       </div>
 
       <div class='col-md-4'>
-        <img class='center-block img-responsive'
-             [style.width.px]='200'
-             [style.margin.px]='2'
-             [src]='product.imageUrl'
-             [title]='product.productName'>
+        <img class='center-block img-responsive' [style.width.px]='200' [style.margin.px]='2' [src]='product.imageUrl'
+          [title]='product.productName'>
       </div>
     </div>
   </div>
 </div>
 
 <!-- review comments card -->
-<div class="card">
+<div class="card" *ngIf="product">
 
   <div class="card-header">
     Reviews
+    <span style="float: right;">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
+        Write Review
+      </button>
+    </span>
   </div>
 
   <div class="card-body">
     <div class="row" *ngFor="let review of product.reviews">
-      {{ review }}
+      <div class="col-md-12">
+        <div>
+          <pm-star [rating]='+review.userRating'></pm-star>
+        </div>
+        <div><strong>{{ review.userName }}</strong></div>
+        <div>{{ review.comment }}</div>
+      </div>
+      <div class="col-md-12">
+        <hr>
+      </div>
     </div>
   </div>
 

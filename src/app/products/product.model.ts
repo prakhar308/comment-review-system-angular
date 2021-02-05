@@ -1,9 +1,8 @@
 export interface IProduct {
-   productId: number;
+   productId: string;
    productName: string;
    description: string;
    price: number;
-   starRating: number;
+   overAllRating: number;
    imageUrl: string;
-   reviews: Array<string>;
 }

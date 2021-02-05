@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators'
 
 import { IProduct } from './product.model'
+import { IProductDetail } from './product-detail/product-detail.model';
 
 @Injectable({
    providedIn: 'root',
@@ -22,10 +23,10 @@ export class ProductService {
          );
    }
 
-   getProduct(id: number): Observable<IProduct | undefined> {
-      return this.getProducts()
+   getProduct(id: string): Observable<IProductDetail> {
+      return this.http.get<IProductDetail>(`${this.productUrl}?product_id=${id}`)
          .pipe(
-            map((products: IProduct[]) => products.find(p => p.productId === id))
+            catchError(this.handleError)
          )
    }
 

@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
       { path: '', redirectTo: 'products', pathMatch: 'full' },
       { path: '**', redirectTo: 'products', pathMatch: 'full' },
    ]),
-   ProductModule,
+   ProductModule
   ],
   providers: [],
   bootstrap: [AppComponent]
