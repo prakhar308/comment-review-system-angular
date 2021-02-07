@@ -1,5 +1,5 @@
 import { IAttributeRating } from "src/app/attribute-rating/attribute-rating.model";
-import { IProductReview } from "../product-review.model";
+import { IProductReview } from "../../reviews/product-review.model";
 
 export interface IProductDetail {
   productId: string;

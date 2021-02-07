@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  pageTitle = 'Efficient Review System';
+  pageTitle = 'AI Based Product Rating System';
 }

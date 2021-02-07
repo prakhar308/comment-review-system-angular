@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router'
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 
-import { IProduct } from '../product.model'
 import { ProductService } from '../product.service'
+import { IReviewRequest } from '../../reviews/review-request.model';
 import { IProductDetail } from './product-detail.model';
+import { ReviewService } from 'src/app/reviews/review.service';
+import { ToastrService } from 'src/app/shared/toastr.service';
+import { $ } from 'protractor';
 
 @Component({
    templateUrl: './product-detail.component.html',
@@ -12,22 +15,65 @@ import { IProductDetail } from './product-detail.model';
 export class ProductDetailComponent implements OnInit {
    pageTitle: string = 'Product Detail'
    product: IProductDetail;
+   review: IReviewRequest;
+   productId: string;
 
    constructor(private route: ActivatedRoute,
-               private router: Router,
-               private productService: ProductService) { }
+               private productService: ProductService,
+               private reviewService: ReviewService,
+               private toastrService: ToastrService) { }
 
    ngOnInit(): void {
-      let id = this.route.snapshot.paramMap.get('id');
-      this.pageTitle += `: ${id}`;
+      this.review = {
+         comment: "",
+         user_name: "",
+         email: "",
+         rating: null,
+         product_id: this.route.snapshot.paramMap.get('id')
+      };
+      this.productId = this.route.snapshot.paramMap.get('id');
+      this.pageTitle += `: ${this.productId}`;
+      
       // get product from api using id
-      this.productService.getProduct(id).subscribe({
+      this.productService.getProduct(this.productId).subscribe({
          next: product => this.product = product,
       })
    }
 
-   onBack(): void {
-      this.router.navigate(['/products']);
+   onRatingClicked(rating: number) {
+      this.review.rating = rating;
+   }
+
+   onReviewSubmit() {
+      this.reviewService
+         .addReview(this.review)
+         .subscribe(
+            () => { 
+               // show success message
+               this.toastrService.success("Added Review successfully")
+               // dismiss modal
+               // refresh
+               this.productService.getProduct(this.productId).subscribe({
+                  next: product => this.product = product,
+               })
+               // clear modal
+               this.clearModal();
+            },
+            (error) => { 
+               // show error message
+               this.toastrService.error(error);
+            } 
+         )
+   }
+
+   clearModal() {
+      this.review = {
+         comment: "",
+         user_name: "",
+         email: "",
+         rating: null,
+         product_id: this.route.snapshot.paramMap.get('id')
+      };
    }
 
 }

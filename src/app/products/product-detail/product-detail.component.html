@@ -12,29 +12,26 @@
           <h4 class="modal-title">Write Review</h4>
         </div>
         <div class="modal-body">
-          <form ngNativeValidate>
-
+          <form #reviewForm="ngForm" ngNativeValidate (ngSubmit)="onReviewSubmit()">
             <div class="form-group">
-              <label for="">Rating</label>
+              <label>Rating</label>
+              <star-rating [rating]="review.rating" (ratingClicked)="onRatingClicked($event)"></star-rating>
             </div>
             <div class="form-group">
               <label for="userName">Name</label>
-              <input type="text" class="form-control" id="userName" name="userName" required>
+              <input [(ngModel)]="review.user_name" type="text" class="form-control" id="userName" name="user_name" required>
             </div>
             <div class="form-group">
-              <label for="userName">Email</label>
-              <input type="email" class="form-control" id="userName" name="userName" required>
+              <label for="email">Email</label>
+              <input [(ngModel)]="review.email" type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="form-group">
-              <label for="userName">Review</label>
-              <textarea name="comment" class="form-control" id="comment" cols="30" rows="5" required></textarea>
+              <label for="comment">Review</label>
+              <textarea [(ngModel)]="review.comment" name="comment" class="form-control" id="comment" cols="30" rows="5" required></textarea>
             </div>
-
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;
+            <button type="submit" class="btn btn-primary" [disabled]="reviewForm.invalid">Submit</button>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Submit</button>
         </div>
       </div>
 
@@ -99,8 +96,8 @@
   <div class="card-body">
     <div class="row" *ngFor="let review of product.reviews">
       <div class="col-md-12">
-        <div>
-          <pm-star [rating]='+review.userRating'></pm-star>
+        <div class="review-rating">
+          {{ review.userRating }} <span class="fa fa-star"></span>
         </div>
         <div><strong>{{ review.userName }}</strong></div>
         <div>{{ review.comment }}</div>

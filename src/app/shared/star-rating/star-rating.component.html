@@ -1,0 +1,6 @@
+<div class="star-rating">
+  <ng-container *ngFor="let rating of [1,2,3,4,5]">
+    <i class="fa fa-3x fa-star" (click)="onRatingClicked(rating)"
+      [ngStyle]="{'color': rating <= selectedRating ? '#ffc107' : '#ddd' }"></i>
+  </ng-container>
+</div>

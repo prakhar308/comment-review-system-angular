@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { StarComponent } from './Star/star.component'
 import { SpinnerComponent } from './Spinner/spinner.component';
 import { RatingPercentagePipe } from './pipes/rating-percentage.pipe';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 
 @NgModule({
    declarations: [
       StarComponent,
       SpinnerComponent,
-      RatingPercentagePipe
+      RatingPercentagePipe,
+      StarRatingComponent
    ],
    imports: [
       CommonModule,
@@ -20,7 +22,8 @@ import { RatingPercentagePipe } from './pipes/rating-percentage.pipe';
       CommonModule,
       FormsModule,
       SpinnerComponent,
-      RatingPercentagePipe
+      RatingPercentagePipe,
+      StarRatingComponent
    ]
 })
 export class SharedModule { }
