@@ -12,6 +12,9 @@
           <h4 class="modal-title">Write Review</h4>
         </div>
         <div class="modal-body">
+
+          <spinner *ngIf="addingReview"></spinner>
+
           <form #reviewForm="ngForm" ngNativeValidate (ngSubmit)="onReviewSubmit()">
             <div class="form-group">
               <label>Rating</label>

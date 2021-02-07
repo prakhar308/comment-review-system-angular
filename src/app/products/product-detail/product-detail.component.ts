@@ -17,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
    product: IProductDetail;
    review: IReviewRequest;
    productId: string;
+   addingReview: boolean = false;
 
    constructor(private route: ActivatedRoute,
                private productService: ProductService,
@@ -45,10 +46,12 @@ export class ProductDetailComponent implements OnInit {
    }
 
    onReviewSubmit() {
+      this.addingReview = true;
       this.reviewService
          .addReview(this.review)
          .subscribe(
             () => { 
+               this.addingReview = false;
                // show success message
                this.toastrService.success("Added Review successfully")
                // dismiss modal
@@ -60,6 +63,7 @@ export class ProductDetailComponent implements OnInit {
                this.clearModal();
             },
             (error) => { 
+               this.addingReview = false;
                // show error message
                this.toastrService.error(error);
             } 
